@@ -1,11 +1,55 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
 }
 
-class MyApp extends StatelessWidget {
+class MyAppState extends State<MyApp> {
+  var questionIndex = 0;
+
+  void answerQuestion() {
+    setState(() {
+    questionIndex = questionIndex + 1;
+    });
+    print(questionIndex);
+  }
+
+  @override // just annotation to make clear that I really wanted to override the following code
   Widget build(BuildContext context) {
-    return MaterialApp(home: Text('Hello')); // base setup to turn widgets into an actual app
+    var questions = [
+      'What\'s your favorite color?',
+      'What\'s your favorite animal?',
+    ];
+
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('My First App'),
+        ),
+        body: Column(
+          children: [
+            Text(questions[questionIndex]),
+            RaisedButton(
+              child: Text('Answer 1'),
+              onPressed: answerQuestion,
+            ),
+            RaisedButton(
+              child: Text('Answer 2'),
+              onPressed: () => print('Answer 2 chosen!'),
+            ),
+            RaisedButton(
+              child: Text('Answer 3'),
+              onPressed: answerQuestion,
+            ),
+          ],
+        ),
+      ),
+    ); // base setup to turn widgets into an actual app
   }
 }
